@@ -137,6 +137,18 @@ def create_timelapse_video(video, req_time):
         video: input video
         req_time: Time in frames of output timelapse
     """
+    # print("vid: " + str(len(video)))
+    # print("req: " + str(req_time))
+    # print("skip: " + str(skip))
+
     skip = int(len(video) / req_time)
+
+    if skip is 0:
+        while len(video) <= req_time:
+            video.append(video[-1])
+        return video
+
+
+
     timelapse = [video[i] for i in range(0, len(video), skip)]
     return timelapse
